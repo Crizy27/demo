@@ -59,9 +59,16 @@ int print_string(va_list types, char buffer[],
 	{
 		if (flags & F_MINUS)
 		{
-			write(1, &str[0]' length);
-			for (i = width - length; i > 0; 1--)
+			write(1, &str[0], length);
+			for (i = width - length; i > 0; i--)
 				write(1, " ", 1);
+			return (width);
+		}
+		else
+		{
+			for (i = width - length; i > 0; i--)
+				write(1, " ", 1);
+			write(1, &str[0], length);
 			return (width);
 		}
 	}
@@ -70,11 +77,11 @@ int print_string(va_list types, char buffer[],
 /************************* PRINT PERCENT SIGNED *************************/
 
 /**
- * print_percent - prints a percent
+ * print_percent - prints a percent sign
  * @types: List a of arguments
  * @buffer: Buffer array to handle print
  * @flags: calculates active flags
- * @width: Width
+ * @width: get width
  * @precision: Precision specification
  * @size: Size specifier
  * Retur: Number of chars printed
@@ -97,7 +104,7 @@ int print_percent(va_list types, char buffer[],
  * @types: List a of arguments
  * @buffer: Buffer array to handle print
  * @flags: calculates active flags
- * @width: Width
+ * @width: get width
  * @precision: Precision specification
  * @size: Size specifier
  * Retur: Number of chars printed
@@ -141,7 +148,7 @@ int print_percent(va_list types, char buffer[],
  * @types: List a of arguments
  * @buffer: Buffer array to handle print
  * @flags: calculates active flags
- * @width: Width
+ * @width: get width
  * @precision: Precision specification
  * @size: Size specifier
  * Retur: Number of chars printed
