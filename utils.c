@@ -18,7 +18,7 @@ int is_printable(char c)
  * append_hexa_code - Append ascci in hexadecimal code to buffer
  * @buffer: Array of chars.
  * @i: Index at which to start appending.
- * @ascii_code: ASSCI CODE.
+ * @ascii_code: ASCII CODE.
  * Return: Always 3
  */
 int append_hexa_code(char ascii_code, char buffer[], int i)
@@ -46,19 +46,19 @@ int append_hexa_code(char ascii_code, char buffer[], int i)
 int is_digit(char c)
 {
 	if (c >= '0' && c <= '9')
-	{
+
 		if (c >= '0' && c <= '9')
 			return (1);
 
 		return (0);
-	}
+
 }
 
 /**
  * convert_size_number - casts a number to the specified size
  * @num: Number to be casted.
  * @size: Number indicating the type to be casted.
- * 
+ *
  * Return: Casted value of num
  */
 long int convert_size_number(long int num, int size)
@@ -78,7 +78,7 @@ long int convert_size_number(long int num, int size)
  *
  * Return: Casted value of num
  */
-long int convert_size_unsgnd(long int num, int size)
+long int convert_size_unsgnd(unsigned long int num, int size)
 {
 	if (size == S_LONG)
 		return (num);

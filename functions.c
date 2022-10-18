@@ -110,20 +110,21 @@ int print_percent(va_list types, char buffer[],
  * Retur: Number of chars printed
  */
 
- int print_char(va_list types, char buffer[],
+int print_int(va_list types, char buffer[],
 		 int flags, int width, int precision, int size)
+
 {
-	int i = BUFF_SIZE - 2;
+	int i = BUFFF_SIZE - 2;
 	int is_negative = 0;
 	long int n = va_arg(types, long int);
 	unsigned long int num;
 
-	n = convert_size_number(n, size);
+	n = covert_size_number(n, size);
 
 	if (n == 0)
 		buffer[i--] = '0';
 
-	buffer[BUFF_SIZE - 1] = '0';
+	buffer[BUFFF_SIZE - 1] = '0';
 	num = (unsigned long int)n;
 
 	if (n < 0)
@@ -133,7 +134,7 @@ int print_percent(va_list types, char buffer[],
 
 	while (num > 0)
 	{
-		buffer[1--] = (num % 10) + '0';
+		buffer[i--] = (num % 10) + '0';
 		num /= 10;
 	}
 
@@ -151,11 +152,12 @@ int print_percent(va_list types, char buffer[],
  * @width: get width
  * @precision: Precision specification
  * @size: Size specifier
- * Retur: Number of chars printed
+ * Retur: Number of char printed
  */
 
- int print_char(va_list types, char buffer[],
+int print_binary(va_list types, char buffer[],
 		 int flags, int width, int precision, int size)
+
 {
 	unsigned int n, m, i, sum;
 	unsigned int a[32];
@@ -175,7 +177,7 @@ int print_percent(va_list types, char buffer[],
 		m /= 2;
 		a[i] = (n / m) % 2;
 	}
-	for (i = 0, sum = 0, count = 0, 1 < 32; i++)
+	for (i = 0, sum = 0, count = 0; 1 < 32; i++)
 	{
 		sum += a[i];
 		if (sum || i == 31)

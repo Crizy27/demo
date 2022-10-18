@@ -7,22 +7,22 @@
  * @buffer: Buffer array to handle print
  * @flags: Calculates active flags
  * @width: get width
- * @precision specification
+ * @precision: precision specification
  * @size: Size specifier
  * Return: Number of chars printed.
  */
-int print_char(va_list types, char buffer[],
+int print_unsigned(va_list types, char buffer[],
 		int flags, int width, int precision, int size)
 {
-	int i = BUFF_SIZE - 2;
+	int i = BUFFF_SIZE - 2;
 	unsigned long int num = va_arg(types, unsigned long int);
 
-	num = convert_size_unsgnd(num, size);
+	num = conver_size_unsgnd(num, size);
 
 	if (num == 0)
 	buffer[i--] = '0';
 
-	buffer[BUFF_SIZE - 1] = '\0';
+	buffer[BUFFF_SIZE - 1] = '\0';
 
 	while (num > 0)
 	{
@@ -41,37 +41,37 @@ int print_char(va_list types, char buffer[],
  * @buffer: Buffer array to handle print
  * @flags: Calculates active flags
  * @width: get width
- * @precision specification
+ * @precision: precision specification
  * @size: Size specifier
  * Return: Number of chars printed.
  */
-int print_char(va_list types, char buffer[],
+int print_octal(va_list types, char buffer[],
 		int flags, int width, int precision, int size)
 {
-	int i = BUFF_SIZE - 2;
+	int i = BUFFF_SIZE - 2;
 	unsigned long int num = va_arg(types, unsigned long int);
 	unsigned long int init_num = num;
 
 	UNUSED(width);
 
-	num = convert_size_unsgnd(num, size);
+	num = conver_size_unsgnd(num, size);
 
 	if (num == 0)
 		buffer[i--] = '0';
 
-	buffer[BUFF_SIZE - 1] = '\0';
+	buffer[BUFFF_SIZE - 1] = '\0';
 
 	while (num > 0)
 	{
 		buffer[i--] = (num % 8) + '0';
 		num /= 8;
 	}
-	
+
 	if (flags & F_HASH && init_num != 0)
 		buffer[i--] = '0';
 	i++;
 
-	return (write_unsigned(0, i, buffer, flags, width, precision, size));
+	return (write_unsgnd(0, i, buffer, flags, width, precision, size));
 }
 /************* PRINT UNSIGNED NUMBER IN HEXADECIMAL **************/
   /**
@@ -84,8 +84,9 @@ int print_char(va_list types, char buffer[],
    * @size: Size specifier
    * Return: Number of chars printed.
    */
- int print_char(va_list types, char buffer[],
+int print_hexadecimal(va_list types, char buffer[],
 		 int flags, int width, int precision, int size)
+
 {
 	return (print_hexa(types, "0123456789abcdef", buffer,
 				flags, 'x', width, precision, size));
@@ -97,39 +98,40 @@ int print_char(va_list types, char buffer[],
  * @buffer: Buffer array to handle print
  * @flags: Calculates active flags
  * @width: get width
- * @precision specification
+ * @precision: precision specification
  * @size: Size specifier
  * Return: Number of chars printed.
  */
-int print_char(va_list types, char buffer[],
+int print_hexa(va_list types, char buffer[],
 		int flags, int width, int precision, int size)
 {
-	int i = BUFF_SIZE -2;
+	int i = BUFFF_SIZE - 2;
+
 	unsigned long int num = va_arg(types, unsigned long int);
 	unsigned long int init_num = num;
 
 	UNUSED(width);
 
-	num = convert_size_unsgnd(num, size);
+	num = conver_size_unsgnd(num, size);
 
 	if (num == 0)
 		buffer[i--] = '0';
 
-	buffer[BUFF_SIZE - 1] = '\0';
+	buffer[BUFFF_SIZE - 1] = '\0';
 
 	while (num > 0)
 	{
 		buffer[i--] = map_to[num % 16];
 		num /= 16;
 	}
-	 if (flags & F_HASH && init_num != 0)
-	 {
-		 buffer[i--] = flag_ch;
-		 buffer[i--] = '0';
-	 }
+	if (flags & F_HASH && init_num != 0)
+	{
+		buffer[i--] = flags;
+		buffer[i--] = '0';
+	}
 
-	 i++;
+	i++;
 
-	 return (write_unsgnd(0, i, buffer, flags, width, precision, size));
+	return (write_unsgnd(0, i, buffer, flags, width, precision, size));
 }
 
